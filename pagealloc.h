@@ -1,3 +1,6 @@
+#ifndef LIB_PAGEALLOC
+#define LIB_PAGEALLOC
+
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
@@ -14,3 +17,5 @@ bool page_alloc(pa_entry_t* entry, size_t size);
 bool page_realloc(pa_entry_t* entry, size_t size);
 
 void page_free(pa_entry_t* entry);
+
+#endif
