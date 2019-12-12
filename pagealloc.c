@@ -6,7 +6,7 @@
 
 bool page_alloc(pa_entry_t* entry, size_t size){
 	void* address;
-	size += (PAGE_SIZE - (size % PAGE_SIZE));
+	//size += (PAGE_SIZE - (size % PAGE_SIZE));
 	address = mmap( 0, size, PROT_READ|PROT_WRITE,
 		MAP_PRIVATE|MAP_ANONYMOUS, -1, 0 );
 	if( address ){
@@ -22,7 +22,7 @@ bool page_alloc(pa_entry_t* entry, size_t size){
 bool page_realloc(pa_entry_t* entry, size_t size){
 	void* address;
 	if( size <= entry->size ) return false;
-	size += (PAGE_SIZE - (size % PAGE_SIZE));
+	//size += (PAGE_SIZE - (size % PAGE_SIZE));
 	address = mmap( 0, size, PROT_READ|PROT_WRITE,
 		MAP_PRIVATE|MAP_ANONYMOUS, -1, 0 );
 	if( address ){
