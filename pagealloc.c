@@ -4,10 +4,13 @@
 
 #define PAGE_SIZE 4096
 
+extern void *__real_mmap(void *addr, size_t length, int prot, int flags,
+                  int fd, off_t offset);
+
 bool page_alloc(pa_entry_t* entry, size_t size){
 	void* address;
 	//size += (PAGE_SIZE - (size % PAGE_SIZE));
-	address = mmap( 0, size, PROT_READ|PROT_WRITE,
+	address = __real_mmap( 0, size, PROT_READ|PROT_WRITE,
 		MAP_PRIVATE|MAP_ANONYMOUS, -1, 0 );
 	if( address ){
 		entry->address = address;
@@ -23,7 +26,7 @@ bool page_realloc(pa_entry_t* entry, size_t size){
 	void* address;
 	if( size <= entry->size ) return false;
 	//size += (PAGE_SIZE - (size % PAGE_SIZE));
-	address = mmap( 0, size, PROT_READ|PROT_WRITE,
+	address = __real_mmap( 0, size, PROT_READ|PROT_WRITE,
 		MAP_PRIVATE|MAP_ANONYMOUS, -1, 0 );
 	if( address ){
 		memcpy( address, entry->address, entry->size );

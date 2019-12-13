@@ -1,6 +1,14 @@
 #include "pagealloc.h"
 #include <stdio.h>
 
+extern void *__real_mmap(void *addr, size_t length, int prot, int flags,
+                  int fd, off_t offset);
+
+void *__wrap_mmap(void *addr, size_t length, int prot, int flags,
+                  int fd, off_t offset){
+  return __real_mmap(addr,length,prot,flags,fd,offset);
+}
+
 int main(){
 	pa_entry_t pa_buf;
 	char* buf;
