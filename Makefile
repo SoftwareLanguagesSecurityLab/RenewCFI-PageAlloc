@@ -1,6 +1,6 @@
 
 all:
-	$(CC) -m32 -Wall -Wextra -fPIC -c pagealloc.c
+	$(CC) -m32 -Wall -Wextra -fPIC -O2 -c pagealloc.c
 	$(AR) -rsc libpagealloc.a pagealloc.o
 	$(CC) -g -m32 -Wall -Wextra test.c libpagealloc.a pagealloc.h -Wl,-wrap=mmap -o test
 
